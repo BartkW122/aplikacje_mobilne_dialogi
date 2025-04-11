@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,11 +33,14 @@ public class MainActivity extends AppCompatActivity {
         Button btn2=findViewById(R.id.button2);
         Button btn3=findViewById(R.id.button3);
         Button btn4=findViewById(R.id.button4);
+        Button btn5=findViewById(R.id.button5);
 
         btn.setOnClickListener(v-> showAlertDialog());
         btn2.setOnClickListener(v-> showListDialog());
         btn3.setOnClickListener(v-> showdatePickerDialog());
         btn4.setOnClickListener(v-> showtimeDialog());
+        btn5.setOnClickListener(v-> showcustomDialog());
+
     }
 
     private  void showAlertDialog(){
@@ -106,5 +110,20 @@ public class MainActivity extends AppCompatActivity {
         },hour,minute,true);
 
         timePickerDialog.show();
+    }
+
+    private  void  showcustomDialog(){
+        final  android.app.Dialog dialog = new android.app.Dialog(this);
+        dialog.setContentView(R.layout.coustom_dialog);
+
+        Button btn6 = dialog.findViewById(R.id.button6);
+        EditText text= dialog.findViewById(R.id.editTextText);
+
+        btn6.setOnClickListener(v->{
+            Toast.makeText(MainActivity.this,"Napisano:"+text.getText().toString().trim(),Toast.LENGTH_LONG).show();
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 }
