@@ -2,6 +2,7 @@ package com.example.dialogi_zadanie;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,17 +26,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btn_delete=findViewById(R.id.delete_btn);
+        Button btn_reset=findViewById(R.id.reset);
+
+        licznik=findViewById(R.id.licznik);
 
         if(savedInstanceState!=null){
             ilosc=savedInstanceState.getInt(ilosc_klik);
         }
-       // ustaw();
+        ustaw();
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ilosc=0;
+                licznik.setText("Dane usunięto: "+ilosc+" razy");
+            }
+        });
 
         btn_delete.setOnClickListener(view -> AlterDialog());
+
     }
     protected  void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putInt(ilosc_klik,ilosc);
+    }
+    private  void  ustaw(){
+        licznik.setText("Dane usunięto: "+ilosc+" razy");
     }
     private void AlterDialog(){
         AlertDialog.Builder builder =new AlertDialog.Builder(this);
@@ -43,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Potwierdzenie!");
         builder.setMessage("Czy na pewno chcesz usunąć dane?");
 
-        licznik=findViewById(R.id.licznik);
 
         builder.setPositiveButton("Tak", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ilosc+=1;
-                licznik.setText("Dane usunięto: "+ilosc+" razy");
+                ilosc++;
+                //licznik.setText("Dane usunięto: "+ilosc+" razy");
+                ustaw();
                 Toast.makeText(MainActivity.this,"Dane zostały usunięte",Toast.LENGTH_SHORT).show();
             }
         });
@@ -62,8 +77,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.create().show();
-    }
-    private  void  ustaw(){
-        licznik.setText("Dane usunięto: "+ilosc+" razy");
     }
 }

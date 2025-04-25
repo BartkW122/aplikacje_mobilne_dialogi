@@ -15,11 +15,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dane usunięto: 0 razy" />
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="center">
+
     <Button
         android:id="@+id/delete_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Usuń dane"
         />
-
+    <Button
+        android:id="@+id/reset"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resetuj licznik"
+        />
+    </LinearLayout>
 </LinearLayout>
